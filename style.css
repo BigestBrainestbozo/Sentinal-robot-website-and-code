@@ -1,0 +1,534 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #101010;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard {
+    min-height: 100vh;
+    padding: 24px;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.mission-label {
+    margin: 0 0 5px;
+    color: #ff8c32;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.mission-time {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 10px;
+    color: #bbbbbb;
+    font-family: monospace;
+}
+
+#current-time {
+    color: #ff8c32;
+    font-weight: bold;
+}
+
+.status-panel {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+
+.status-panel p {
+    margin: 0;
+    padding: 10px 16px;
+    background: #202020;
+    border: 1px solid #555;
+    border-radius: 8px;
+}
+
+#connection {
+    color: #ff5555;
+}
+
+#connection.connected {
+    color: #63ff7b;
+    animation: connectionPulse 1.4s infinite;
+}
+
+#connection.offline {
+    color: #ff5555;
+}
+
+@keyframes connectionPulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.45;
+    }
+}
+
+#battery.battery-good {
+    color: #63ff7b;
+}
+
+#battery.battery-low {
+    color: #ffd24a;
+}
+
+#battery.battery-critical {
+    color: #ff5555;
+    animation: batteryPulse 0.8s infinite;
+}
+
+@keyframes batteryPulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+}
+
+.current-command-card {
+    width: 280px;
+    margin: 16px auto;
+    padding: 14px 20px;
+    text-align: center;
+    background: #1c1c1c;
+    border: 2px solid #ff7a18;
+    border-radius: 12px;
+}
+
+.current-command-card > span {
+    display: block;
+    color: #aaaaaa;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.command-icon {
+    margin: 7px 0 3px;
+    color: #ff8c32;
+    font-size: 64px;
+    line-height: 1;
+}
+
+.command-icon.command-change {
+    animation: iconChange 0.25s ease;
+}
+
+@keyframes iconChange {
+    0% {
+        transform: scale(0.65);
+        opacity: 0.25;
+    }
+
+    70% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.current-command-card strong {
+    display: block;
+    width: 100%;
+    color: #ff8c32;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+.current-command-card.command-change {
+    animation: commandChange 0.25s ease;
+}
+
+@keyframes commandChange {
+    0% {
+        transform: scale(0.94);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.control-panel {
+    position: fixed;
+    left: -45px;
+    bottom: -45px;
+    width: 430px;
+    height: 430px;
+    background: #181818;
+    border-top: 3px solid #ff7a18;
+    border-right: 3px solid #ff7a18;
+    border-radius: 0 100% 0 0;
+}
+
+.control-button {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    background: #262626;
+    color: #ff8c32;
+    font-size: 42px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    box-shadow:
+        0 6px 12px rgba(0, 0, 0, 0.6),
+        inset 0 2px 4px rgba(255, 255, 255, 0.12);
+    transition:
+        transform 0.08s ease,
+        box-shadow 0.08s ease,
+        background-color 0.08s ease;
+}
+
+.control-button:hover {
+    background: #383838;
+}
+
+.control-button.active,
+.control-button:active {
+    transform: translateY(6px) scale(0.96);
+    background: #ff7a18;
+    color: #111;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.7),
+        inset 0 5px 10px rgba(0, 0, 0, 0.45);
+}
+
+.forward {
+    left: 150px;
+    top: 40px;
+}
+
+.left {
+    left: 45px;
+    top: 155px;
+}
+
+.stop {
+    left: 150px;
+    top: 155px;
+}
+
+.right {
+    left: 255px;
+    top: 155px;
+}
+
+.backward {
+    left: 150px;
+    top: 270px;
+}
+
+.history-panel {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 250px;
+    min-height: 230px;
+    padding: 18px;
+    background: #1c1c1c;
+    border: 1px solid #555;
+    border-radius: 12px;
+}
+
+.history-panel h2 {
+    margin-top: 0;
+    color: #ff8c32;
+}
+
+#command-history {
+    padding-left: 24px;
+}
+
+#command-history li {
+    margin-bottom: 8px;
+}
+
+.mobile-controls {
+    display: none;
+}
+
+#emergency-stop {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    padding: 16px 28px;
+    border: 2px solid #ff4545;
+    border-radius: 12px;
+    background: #8f1111;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(255, 69, 69, 0.35);
+}
+
+#emergency-stop:active {
+    transform: translateX(-50%) scale(0.94);
+    background: #ff3030;
+}
+
+@media (max-width: 950px) and (orientation: landscape) {
+    body {
+        overflow: hidden;
+    }
+
+    .dashboard {
+        padding: 10px;
+    }
+
+    header {
+        position: fixed;
+        top: 8px;
+        left: 10px;
+        right: 10px;
+        z-index: 5;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .mission-label {
+        margin-bottom: 2px;
+        font-size: 9px;
+    }
+
+    .mission-time {
+        margin-top: 3px;
+        font-size: 10px;
+    }
+
+    .status-panel {
+        display: none;
+    }
+
+    .current-command-card {
+        position: fixed;
+        top: 64px;
+        left: 50%;
+        width: 260px;
+        margin: 0;
+        padding: 7px 12px;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 6;
+    }
+
+    .current-command-card.command-change {
+        animation: landscapeCommandChange 0.25s ease;
+    }
+
+    @keyframes landscapeCommandChange {
+        0% {
+            transform: translateX(-50%) scale(0.94);
+            opacity: 0.5;
+        }
+
+        100% {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .command-icon {
+        margin: 3px 0 1px;
+        font-size: 46px;
+    }
+
+    .current-command-card strong {
+        font-size: 17px;
+    }
+
+    .desktop-controls {
+        display: none;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    .mobile-controller {
+        position: fixed;
+        left: 28px;
+        bottom: 18px;
+        align-items: center;
+    }
+
+    .joystick {
+        position: relative;
+        width: 220px;
+        height: 220px;
+        border: 4px solid #ff7a18;
+        border-radius: 50%;
+        background: radial-gradient(circle, #303030 0%, #151515 70%);
+        touch-action: none;
+        user-select: none;
+        transition: box-shadow 0.15s ease;
+    }
+
+    .joystick.active {
+        box-shadow:
+            0 0 12px rgba(255, 122, 24, 0.8),
+            0 0 28px rgba(255, 122, 24, 0.45);
+    }
+
+    .joystick::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 12%;
+        right: 12%;
+        height: 2px;
+        background: #555;
+        transform: translateY(-50%);
+    }
+
+    .joystick::after {
+        content: "";
+        position: absolute;
+        top: 12%;
+        bottom: 12%;
+        left: 50%;
+        width: 2px;
+        background: #555;
+        transform: translateX(-50%);
+    }
+
+    .joystick-knob {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 82px;
+        height: 82px;
+        transform: translate(-50%, -50%);
+        border: 3px solid #777;
+        border-radius: 50%;
+        background: #2d2d2d;
+        pointer-events: none;
+        z-index: 2;
+        box-shadow:
+            0 8px 15px rgba(0, 0, 0, 0.7),
+            inset 0 2px 5px rgba(255, 255, 255, 0.15);
+        transition: box-shadow 0.15s ease;
+    }
+
+    .joystick.active .joystick-knob {
+        box-shadow:
+            0 0 16px rgba(255, 140, 50, 0.8),
+            0 8px 15px rgba(0, 0, 0, 0.7),
+            inset 0 2px 5px rgba(255, 255, 255, 0.15);
+    }
+
+    .history-panel {
+        display: none;
+    }
+
+    #emergency-stop {
+        left: auto;
+        right: 28px;
+        bottom: 22px;
+        transform: none;
+        padding: 12px 18px;
+        font-size: 12px;
+    }
+
+    #emergency-stop:active {
+        transform: scale(0.94);
+    }
+}
+
+@media (max-width: 950px) and (orientation: portrait) {
+    header,
+    .current-command-card,
+    .desktop-controls,
+    .mobile-controls,
+    .history-panel,
+    #emergency-stop {
+        display: none;
+    }
+
+    .dashboard {
+        min-height: 100vh;
+        padding: 0;
+    }
+
+    .dashboard::before {
+        content: "MARS ROVER MK I";
+        position: fixed;
+        top: 39%;
+        left: 50%;
+        width: 90%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-align: center;
+        font-size: 25px;
+        font-weight: bold;
+        letter-spacing: 3px;
+    }
+
+    .dashboard::after {
+        content: "↻ Rotate your phone sideways to use the rover controller";
+        position: fixed;
+        top: 53%;
+        left: 50%;
+        width: 80%;
+        transform: translate(-50%, -50%);
+        color: #ff8c32;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1.5;
+        animation: rotateMessage 1.7s ease-in-out infinite;
+    }
+}
+
+@keyframes rotateMessage {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(5deg);
+    }
+}

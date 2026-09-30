@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Rover Mk I</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="dashboard">
+
+        <header>
+            <p class="mission-label">MISSION</p>
+            <h1>Mars Rover Mk I</h1>
+
+            <div class="mission-time">
+                <span id="current-date">--</span>
+                <span id="current-time">--:--:--</span>
+            </div>
+
+            <div class="status-panel">
+                <p>
+                    Connection:
+                    <span id="connection" class="offline">Offline</span>
+                </p>
+
+                <p>
+                    Battery:
+                    <span id="battery">--%</span>
+                </p>
+
+                <p>
+                    Wi-Fi:
+                    <span id="wifi">Disconnected</span>
+                </p>
+
+                <p>
+                    Mode:
+                    <span id="mode">Manual</span>
+                </p>
+            </div>
+        </header>
+
+        <section class="current-command-card">
+            <span>Current Command</span>
+            <div id="command-icon" class="command-icon">■</div>
+            <strong id="status">STOP</strong>
+        </section>
+
+        <div class="control-panel desktop-controls">
+            <button class="control-button forward" data-command="FORWARD">↑</button>
+            <button class="control-button left" data-command="LEFT">←</button>
+            <button class="control-button stop" data-command="STOP">■</button>
+            <button class="control-button right" data-command="RIGHT">→</button>
+            <button class="control-button backward" data-command="BACKWARD">↓</button>
+        </div>
+
+        <div class="mobile-controller mobile-controls">
+            <div id="joystick" class="joystick">
+                <div id="joystick-knob" class="joystick-knob"></div>
+            </div>
+        </div>
+
+        <button id="emergency-stop">
+            EMERGENCY STOP
+        </button>
+
+        <section class="history-panel">
+            <h2>Recent Commands</h2>
+            <ol id="command-history"></ol>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
